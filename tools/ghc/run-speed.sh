@@ -34,7 +34,8 @@ then
 	exit 1
 fi
 
-logfile="$rev-$(date --iso=minutes).log")
+#logfile="$rev-$(date --iso=minutes).log"
+logfile="$rev.log"
 exec > >(tee "$logfile".tmp)
 exec 2>&1
 

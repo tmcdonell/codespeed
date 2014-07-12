@@ -1,19 +1,22 @@
 #!/bin/bash
 
-scripts=$(dirname $0)
+scripts="$(realpath "$(dirname $0)")"
 cd /data1/breitner/ghc/ghc-speed
 
-set nullglob
 
-while sleep 60
+while true
 do
 	(cd ghc-master; git pull)
 	for rev in $(cd ghc-master; git log --oneline --first-parent db19c665ec5055c2193b2174519866045aeff09a..HEAD | cut -d\  -f1)
 	do
-		if [ -z "$rev-*log" -a -z "ghc-$rev" ]
+		if ! [ -e "$rev.log" -o -d "ghc-$rev" ]
 		then
-			$scripts/run-speed $rev
-			$scripts/log2json.pl $rev*.log
-			$scripts/upload.sh $rev*.json
+			echo "Benchmarking $rev..."
+			$scripts/run-speed.sh "$rev" >/dev/null
+			$scripts/log2json.pl "$rev.log"
+			$scripts/upload.sh "$rev.json"
+			break
 		fi
+	done
+	sleep 60 || break
 done
