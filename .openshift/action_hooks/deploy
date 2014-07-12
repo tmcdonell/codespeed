@@ -1,0 +1,20 @@
+#!/bin/bash
+# This deploy hook gets executed after dependencies are resolved and the
+# build hook has been run but before the application has been started back
+# up again.  This script gets executed directly, so it could be python, php,
+# ruby, etc.
+
+# Not needed?
+# source ${OPENSHIFT_PYHON_DIR}/virtenv/bin/activate
+
+echo "Executing 'python ${OPENSHIFT_REPO_DIR}nbip_server/manage.py syncdb --noinput'"
+python "$OPENSHIFT_REPO_DIR"/manage.py syncdb --noinput
+
+echo "Executing 'python ${OPENSHIFT_REPO_DIR}nbip_server/manage.py migrate'"
+python "$OPENSHIFT_REPO_DIR"/manage.py migrate
+
+#echo "Executing 'python ${OPENSHIFT_REPO_DIR}nbip_server/manage.py populate_db'"
+#python "$OPENSHIFT_REPO_DIR"/manage.py populate_db
+
+echo "Executing 'python ${OPENSHIFT_REPO_DIR}nbip_server/manage.py collectstatic --noinput -v0'"
+python "$OPENSHIFT_REPO_DIR"/manage.py collectstatic --noinput -v0
