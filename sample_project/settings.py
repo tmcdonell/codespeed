@@ -86,7 +86,7 @@ if DEBUG:
     MIDDLEWARE_CLASSES += ('sample_project.settings.LogUncatchedErrors',)
 
     # set shown level of logging output to debug
-    logging.basicConfig(level=logging.DEBUG)
+    # logging.basicConfig(level=logging.DEBUG)
 
 ROOT_URLCONF = '{0}.urls'.format(TOPDIR)
 
