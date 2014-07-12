@@ -1,0 +1,26 @@
+[
+{
+  "pk": 1, 
+  "model": "codespeed.project", 
+  "fields": {
+    "repo_type": "H", 
+    "name": "GHC", 
+    "commit_browsing_url": "", 
+    "repo_user": "", 
+    "track": true, 
+    "repo_pass": "", 
+    "repo_path": "https://github.com/ghc/ghc/"
+  }
+},
+{
+  "pk": 1, 
+  "model": "codespeed.environment", 
+  "fields": {
+    "kernel": "3.11.0-20", 
+    "memory": "16GB", 
+    "os": "Ubuntu saucy", 
+    "name": "nomeata's buildbot", 
+    "cpu": "Intel(R) Core(TM) i7-3770 CPU "
+  }
+}
+]
