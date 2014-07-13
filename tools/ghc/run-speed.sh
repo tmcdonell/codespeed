@@ -19,7 +19,7 @@ fi
 
 set -e
 
-cd /data1/breitner/ghc/ghc-speed/
+cd ~/logs/
 
 cd ghc-master
 git pull

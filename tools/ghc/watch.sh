@@ -1,7 +1,7 @@
 #!/bin/bash
 
 scripts="$(realpath "$(dirname $0)")"
-cd /data1/breitner/ghc/ghc-speed
+cd ~/logs/
 
 
 while true
