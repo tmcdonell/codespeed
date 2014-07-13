@@ -42,7 +42,7 @@ for my $filename (@ARGV) {
 	}
 	run (["nofib-analyse", "--csv=Runtime"], \$log, \$out) or die "cat: $?";
 	for (split /^/, $out) {
-		$results{"nofib/runtime/$1"} = $2 if /(.*),(.*)/;
+		$results{"nofib/runtime/$1"} = $2 if /(.*),(.*)/ and $2 > 1.0;
 	}
 
 	my $data = [];
