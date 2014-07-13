@@ -13,6 +13,11 @@ my $TIME = {
 	units => "seconds",
 	lessisbetter => "True",
 };
+my $BUILDTIME = {
+	units_title => "Buildtime",
+	units => "seconds",
+	lessisbetter => "True",
+};
 
 my $ALLOC = {
 	units_title => "Allocations",
@@ -74,6 +79,9 @@ for my $filename (@ARGV) {
 		if ($log =~ m/^ +(\d+) expected failures/m);
 	$report->($BAD_TESTS, 'testsuite/unexpected failures', $1)
 		if ($log =~ m/^ +(\d+) unexpected failures/m);
+
+	$report->($BUILDTIME, 'buildtime/make', $1*60 + $2)
+		if ($log =~ m/^Buildtime was:\n[\d\.]+user [\d\.]+system (\d+):(\d+\.\d+)elapsed/m);
 
 	my $out;
 	run (["nofib-analyse", "--csv=Allocs"], \$log, \$out) or die "cat: $?";
