@@ -28,9 +28,9 @@ cd ..
 
 
 
-if [ -e "ghc-$rev" ]
+if [ -e "ghc-tmp-$rev" ]
 then
-	echo "ghc-$rev already exists"
+	echo "ghc-tmp-$rev already exists"
 	exit 1
 fi
 
@@ -41,8 +41,8 @@ exec 2>&1
 
 say "Cloning"
 
-run git clone --recursive --reference ghc-master git://git.haskell.org/ghc "ghc-$rev"
-cd "ghc-$rev"
+run git clone --recursive --reference ghc-master git://git.haskell.org/ghc "ghc-tmp-$rev"
+cd "ghc-tmp-$rev"
 run git checkout "$rev"
 
 say "Identifying"
@@ -89,6 +89,6 @@ run du -sc .
 say "Cleaning up"
 
 run cd ..
-run rm -rf "ghc-$rev"
+run rm -rf "ghc-tmp-$rev"
 
 mv "$logfile".tmp "$logfile"
