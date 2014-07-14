@@ -9,7 +9,7 @@ do
 	(cd ghc-master; git pull)
 	for rev in $(cd ghc-master; git log --oneline --first-parent db19c665ec5055c2193b2174519866045aeff09a..HEAD | cut -d\  -f1)
 	do
-		if ! [ -e "$rev.log" -o -d "ghc-tmp-$rev" ]
+		if ! [ -e "$rev.log" -o  -e "$rev.log.broken" -o -d "ghc-tmp-$rev" ]
 		then
 			echo "Benchmarking $rev..."
 			$scripts/run-speed.sh "$rev" >/dev/null
