@@ -73,7 +73,7 @@ cat buildtime
 
 say "Running the testsuite"
 
-run make -C testsuite fast VERBOSE=2 THREADS=8
+run make -C testsuite fast VERBOSE=4 THREADS=8
 
 say "Running nofib"
 
