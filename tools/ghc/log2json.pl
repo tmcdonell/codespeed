@@ -25,6 +25,12 @@ my $ALLOC = {
 	lessisbetter => "True",
 };
 
+my $BINARY_SIZE = {
+	units_title => "Binary size",
+	units => "bytes",
+	lessisbetter => "True",
+};
+
 my $GOOD_TESTS = {
 	units_title => "Tests",
 	units => "tests",
@@ -93,6 +99,11 @@ for my $filename (@ARGV) {
 	for (split /^/, $out) {
 		$report->($TIME, "nofib/time/$1", $2)
 			if /(.*),(.*)/ and $2 > 1.0;
+	}
+	run (["nofib-analyse", "--csv=Size"], \$log, \$out) or die "cat: $?";
+	for (split /^/, $out) {
+		$report->($BINARY_SIZE, "nofib/size/$1", $2)
+			if /(.*),(.*)/;
 	}
 	write_file($output, to_json($data, {utf8 => 1, pretty => 1}));
 }
