@@ -2,7 +2,7 @@
 # Django settings for a speedcenter project.
 import os
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 BASEDIR = os.path.abspath(os.path.dirname(__file__))
