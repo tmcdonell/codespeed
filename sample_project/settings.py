@@ -103,6 +103,13 @@ if DEBUG:
     # set shown level of logging output to debug
     # logging.basicConfig(level=logging.DEBUG)
 
+# http://stackoverflow.com/questions/19875789
+ALLOWED_HOSTS = [
+    'localhost',
+    'ghcspeed-nomeata.rhcloud.com'
+    ]
+
+
 ROOT_URLCONF = '{0}.urls'.format(TOPDIR)
 
 TEMPLATE_DIRS = (
