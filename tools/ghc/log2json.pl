@@ -73,6 +73,10 @@ for my $filename (@ARGV) {
 
 	};
 
+	$report->($ALLOC, "tests/alloc/$1", $2)
+		while ($log =~ m/^    Actual  +([a-zA-Z0-9_\.-]+)\([a-z]*\) bytes allocated: (\d+)\s*$/mg);
+
+
 	$report->($GOOD_TESTS, 'testsuite/tests', $1)
 		if ($log =~ m/^ +(\d+) total tests, which gave rise to/m);
 	$report->($GOOD_TESTS, 'testsuite/expected passes', $1)
