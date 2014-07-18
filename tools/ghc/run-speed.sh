@@ -7,8 +7,8 @@ function say {
 }
 
 function run {
-	    echo "$@"
-		"$@"
+	echo "$@"
+	"$@"
 }
 
 rev="$1"
@@ -18,6 +18,7 @@ then
 fi
 
 set -e
+
 
 cd ~/logs/
 
@@ -38,6 +39,16 @@ fi
 logfile="$rev.log"
 exec > >(tee "$logfile".tmp)
 exec 2>&1
+
+set -o errtrace
+
+function failure {
+	test -f "$logfile".tmp || cd ..
+	say "Failure..."
+	run mv "$logfile".tmp "$logfile".broken
+	run rm -rf "ghc-tmp-$rev"
+}
+trap failure ERR
 
 say "Cloning"
 
@@ -90,5 +101,4 @@ say "Cleaning up"
 
 run cd ..
 run rm -rf "ghc-tmp-$rev"
-
-mv "$logfile".tmp "$logfile"
+run mv "$logfile".tmp "$logfile"
