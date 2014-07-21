@@ -74,7 +74,10 @@ run perl boot
 
 say "Configuring"
 
-run ./configure 
+echo "Try to match validate settings"
+echo 'GhcLibHcOpts += -O2'  >> mk/build.mk
+
+run ./configure
 
 say "Building"
 
