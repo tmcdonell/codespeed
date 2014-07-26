@@ -37,7 +37,7 @@ fi
 
 #logfile="$rev-$(date --iso=minutes).log"
 logfile="$rev.log"
-exec > >(tee "$logfile".tmp)
+exec > >(sed -e "s/ghc-tmp-$rev/ghc-tmp-REV/g" | tee "$logfile".tmp)
 exec 2>&1
 
 set -o errtrace
