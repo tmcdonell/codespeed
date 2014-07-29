@@ -102,7 +102,7 @@ for my $filename (@ARGV) {
 	run (["nofib-analyse", "--csv=Runtime"], \$log, \$out) or die "cat: $?";
 	for (split /^/, $out) {
 		$report->($TIME, "nofib/time/$1", $2)
-			if /(.*),(.*)/ and $2 > 1.0;
+			if /(.*),(.*)/ and $2 > 0.3;
 	}
 	run (["nofib-analyse", "--csv=Size"], \$log, \$out) or die "cat: $?";
 	for (split /^/, $out) {
