@@ -92,10 +92,8 @@ run make -C testsuite fast VERBOSE=4 THREADS=8 NoFibRuns=15
 
 say "Running nofib"
 
-run cd nofib/
-run make boot
-run make
-run cd ..
+run make -C nofib boot
+run make -C nofib
 
 say "Total space used"
 
