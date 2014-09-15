@@ -7,7 +7,7 @@ cd ~/logs/
 while true
 do
 	(cd ghc-master; git pull)
-	for rev in $(cd ghc-master; git log --oneline --first-parent cfeededff5662a6e2dc0104eb00adcca4d4ae984 | cut -d\  -f1 | tac)
+	for rev in $(cd ghc-master; git log --oneline --first-parent cfeededff5662a6e2dc0104eb00adcca4d4ae984..HEAD | cut -d\  -f1 | tac)
 	do
 		if ! [ -e "$rev.log" -o  -e "$rev.log.broken" -o -d "ghc-tmp-$rev" ]
 		then
