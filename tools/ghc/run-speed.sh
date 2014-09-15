@@ -55,6 +55,7 @@ say "Cloning"
 run git clone --recursive --reference ghc-master git://git.haskell.org/ghc "ghc-tmp-$rev"
 cd "ghc-tmp-$rev"
 run git checkout "$rev"
+git submodule update
 
 say "Identifying"
 
