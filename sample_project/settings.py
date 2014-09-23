@@ -36,12 +36,22 @@ else:
         'NAME': os.path.join(BASEDIR, 'data.db'),
     }
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'db_name',                      
+#        'USER': 'db_user',
+#        'PASSWORD': 'db_user_password',
+#        'HOST': ''
+#    }
+#}
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/Indiana'
 
 USE_TZ = True
 
@@ -147,7 +157,7 @@ STATICFILES_DIRS = (
 from codespeed.settings import *
 
 ## General default options ##
-WEBSITE_NAME = "GHC performance dashboard" # This name will be used in the reports RSS feed
+WEBSITE_NAME = "CREST performance dashboard" # This name will be used in the reports RSS feed
 
 #DEF_ENVIRONMENT = None #Name of the environment which should be selected as default
 
