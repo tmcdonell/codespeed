@@ -145,6 +145,7 @@ class Benchmark(models.Model):
     lessisbetter = models.BooleanField("Less is better", default=True)
     default_on_comparison = models.BooleanField(
         "Default on comparison page", default=True)
+    on_summary = models.BooleanField("Included in summary calculation", default=True)
 
     def __unicode__(self):
         return self.name
@@ -240,6 +241,8 @@ class Report(models.Model):
                     average_trend_color = color
             for row in units['rows']:
                 # Single change
+                if not row['on_summary']:
+                    continue
                 val = row['change']
                 if val == "-":
                     continue
@@ -421,20 +424,24 @@ class Report(models.Model):
                     if c.count() and result is not None:
                         if c[0].value != 0:
                             change = (result - c[0].value) * 100 / c[0].value
-                            totals['change'].append(result / c[0].value)
+                            if bench.on_summary:
+                                totals['change'].append(result / c[0].value)
                         elif c[0].value == 0:
                             if result == 0:
                                 # 0/0 = 1, in our world
                                 change = 0
-                                totals['change'].append(1)
+                                if bench.on_summary:
+                                    totals['change'].append(1)
                             else:
                                 # n/0 = ∞
                                 change = float("inf")
-                                totals['change'].append(float("inf"))
+                                if bench.on_summary:
+                                    totals['change'].append(float("inf"))
                         else:
                             # no previous result, no change available
                             # still, include it in the totals, so that averaging works
-                            totals['change'].append(1)
+                            if bench.on_summary:
+                                totals['change'].append(1)
 
                 # Calculate trend:
                 # percentage change relative to average of 3 previous results
@@ -457,7 +464,8 @@ class Report(models.Model):
                 if average:
                     average = average / averagecount
                     trend = (result - average) * 100 / average
-                    totals['trend'].append(result / average)
+                    if bench.on_summary:
+                        totals['trend'].append(result / average)
 
                 # Retain lowest number different than 0
                 # to be used later for calculating significant digits
@@ -472,7 +480,8 @@ class Report(models.Model):
                     'val_min': val_min,
                     'val_max': val_max,
                     'change': change,
-                    'trend': trend
+                    'trend': trend,
+                    'on_summary': bench.on_summary,
                 })
 
             # Compute Arithmetic averages
