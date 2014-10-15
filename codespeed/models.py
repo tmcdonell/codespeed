@@ -433,7 +433,8 @@ class Report(models.Model):
                                 totals['change'].append(float("inf"))
                         else:
                             # no previous result, no change available
-                            pass
+                            # still, include it in the totals, so that averaging works
+                            totals['change'].append(1)
 
                 # Calculate trend:
                 # percentage change relative to average of 3 previous results
